@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  db-user:
+    image: postgres
+    container_name: postgres-container
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=user-db
