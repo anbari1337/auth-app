@@ -1,16 +1,15 @@
-import { encrypt } from "@/helpers";
-import db from "./";
+import db from ".";
 import { users } from "./schema";
 
 async function main() {
   await db.delete(users);
   const user: typeof users.$inferInsert = {
+    name: "Amine Anbari",
     email: "amine@gmail.com",
     password: "123456",
   };
   try {
-    const hash = encrypt(user.password);
-    await db.insert(users).values({ ...user, password: hash });
+    await db.insert(users).values(user);
     console.log("New user created!");
 
     const usersList = await db.select().from(users);
@@ -23,7 +22,7 @@ async function main() {
   } catch (error) {
     console.error(error);
   } finally {
-    db.$client.end();
+    process.exit();
   }
 }
 
