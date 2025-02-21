@@ -1,4 +1,4 @@
-import { cryptPassword } from "@/helpers";
+import { encrypt } from "@/helpers";
 import db from "./";
 import { users } from "./schema";
 
@@ -9,7 +9,7 @@ async function main() {
     password: "123456",
   };
   try {
-    const hash = cryptPassword(user.password);
+    const hash = encrypt(user.password);
     await db.insert(users).values({ ...user, password: hash });
     console.log("New user created!");
 
