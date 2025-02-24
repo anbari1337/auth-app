@@ -3,12 +3,11 @@ import db from "@/db";
 import "dotenv/config";
 import { LoginFormSchema, SignupFormSchema } from "./auth-schema";
 import { users } from "@/db/schema";
-import { encrypt } from "@/helpers";
 import { redirect } from "next/navigation";
 import { FormState } from "@/types";
 import { eq } from "drizzle-orm";
+import { createSession, deleteSession } from "@/lib/stateless-session";
 import bcrypt from "bcrypt";
-import { createSession } from "@/lib/stateless-session";
 
 export async function signup(formState: FormState, formData: FormData) {
   const result = SignupFormSchema.safeParse({
@@ -23,10 +22,12 @@ export async function signup(formState: FormState, formData: FormData) {
     };
 
   // insert user
+  const hashedPassword = bcrypt.hashSync(result.data.password, 10);
+
   await db.insert(users).values({
     name: result.data.email,
     email: result.data.email,
-    password: encrypt(result.data.password),
+    password: hashedPassword,
   });
 
   redirect("/login");
@@ -60,4 +61,9 @@ export async function login(formState: FormState, formData: FormData) {
   await createSession(user[0].id);
 
   redirect("/");
+}
+
+export async function logout() {
+  deleteSession();
+  redirect("/login");
 }
