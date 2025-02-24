@@ -1,6 +1,6 @@
 "use server";
-import db from "@/db";
 import "dotenv/config";
+import db from "@/db";
 import { LoginFormSchema, SignupFormSchema } from "./auth-schema";
 import { users } from "@/db/schema";
 import { redirect } from "next/navigation";
