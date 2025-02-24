@@ -17,7 +17,6 @@ import React, { useActionState } from "react";
 const Signup = () => {
   const [state, formAction, isPending] = useActionState(signup, null);
 
-  console.log(state?.errors);
   return (
     <div className='w-screen h-screen flex flex-col items-center justify-center gap-6'>
       <Card className='w-[350px]'>
