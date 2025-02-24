@@ -1,3 +1,5 @@
+import { JWTPayload } from "jose";
+
 export interface Signup {
   name: string;
   email: string;
@@ -11,10 +13,13 @@ export interface Login {
 
 export type FormState =
   | {
-      errors: {
-        name?: string[] | undefined;
-        email?: string[] | undefined;
-        password?: string[] | undefined;
+      errors?: {
+        name?: string[];
+        email?: string[];
+        password?: string[];
       };
+      message?: string;
     }
   | undefined;
+
+export type SessionPayload = JWTPayload;
