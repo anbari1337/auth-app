@@ -15,7 +15,7 @@ import Link from "next/link";
 import React, { useActionState } from "react";
 
 const Login = () => {
-  const [state, action, isPending] = useActionState(login, null);
+  const [state, action, isPending] = useActionState(login, undefined);
 
   console.log(state);
   return (

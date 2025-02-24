@@ -15,7 +15,7 @@ import Link from "next/link";
 import React, { useActionState } from "react";
 
 const Signup = () => {
-  const [state, formAction, isPending] = useActionState(signup, null);
+  const [state, formAction, isPending] = useActionState(signup, undefined);
 
   return (
     <div className='w-screen h-screen flex flex-col items-center justify-center gap-6'>

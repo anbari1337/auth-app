@@ -32,10 +32,7 @@ export async function signup(formState: FormState, formData: FormData) {
   redirect("/login");
 }
 
-export async function login(
-  formState: FormState,
-  formData: FormData
-): Promise<void | FormState> {
+export async function login(formState: FormState, formData: FormData) {
   // validate inputs
   const result = LoginFormSchema.safeParse({
     email: formData.get("email"),
